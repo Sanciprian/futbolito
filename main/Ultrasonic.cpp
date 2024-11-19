@@ -16,6 +16,7 @@ void Ultrasonic::BeginUltrasonic()
     _lcd->backlight();
     _lcd->clear();
     _lcd->setCursor(0, 0);
+    this->PrintScore();
 }
 int Ultrasonic::GetDistance()
 {
@@ -50,13 +51,13 @@ bool Ultrasonic::Score()
 
 void Ultrasonic::PrintScore()
 {
-    if (_counter < 10)
+    if (_goals < 10)
     {
-        _lcd->print(_counter);
+        _lcd->print(_goals);
     }
     else
     {
-        String temp = String(_counter);
+        String temp = String(_goals);
         _lcd->print(temp[1]);
         _lcd->setCursor(1, 0);
         _lcd->print(temp[0]);
