@@ -2,7 +2,7 @@
 
 // Constructor //
 Movement::Movement(uint8_t speed, uint8_t dirPin, uint8_t stepPin, uint8_t enablePin, HardwareSerial &port, uint8_t address)
-    : _dir(dirPin), _step(stepPin), _enable(enablePin), _serial(port), _address(address)
+    : _dir(dirPin), _step(stepPin), _enable(enablePin), _serial(port), _address(address), _variation(Constants::SPEED_VARIATION)
 {
   this->SetSpeed(speed);
   _minSpeed = Constants::MIN_SPEED;
@@ -35,7 +35,7 @@ void Movement::BeginMovement()
 // Setters //
 void Movement::SetSpeed(int speed)
 {
-  _speed = map(speed, 0, 100, _minSpeed, _maxSpeed);
+  _speed = map(constrain(speed, 0, 100), 0, 100, _minSpeed, _maxSpeed);
 }
 
 // Methods //
@@ -55,6 +55,12 @@ void Movement::SetRight()
 
 void Movement::Move(unsigned long currentTime)
 {
+  /*
+    Tried to avoid time blocking. Thus created the function this way.
+    However, we need to test in practice if this will work.
+    Since the execution of the code can take longer than the time set in here.
+    If that happend we will need to change to delayMicroseconds();
+  */
   if (_state) // Does nothing onless driver is active
   {
     if (currentTime - _lastTime >= _speed)
@@ -83,4 +89,14 @@ void Movement::SetDriverState(bool state)
 void Movement::DefaultPos()
 {
   // Go to the middle of the field. This method can work when autonomous
+}
+
+void Movement::IncreaseSpeed()
+{
+  this->SetSpeed(_speed + _variation);
+}
+
+void Movement::DecreaseSpeed()
+{
+  this->SetSpeed(_speed - _variation);
 }

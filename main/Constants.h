@@ -10,7 +10,9 @@ enum states
   Stop = 0,
   Left = 1,
   Right = 2,
-  Shoot = 3
+  Shoot = 3,
+  IncreaseSpeed = 4,
+  LowerSpeed = 5
 };
 
 // Constants Values Throughtout The Code //
@@ -32,14 +34,19 @@ public:
   static constexpr uint8_t MIN_SPEED = 600;
   static constexpr uint8_t DEFAULT_SPEED = 300;
   static constexpr uint8_t CURRENT = 1400; // max for driver.
+  static constexpr uint8_t SPEED_VARIATION = 5;
 
   // Controler //
-  static constexpr uint8_t input_a = 0; // Faltan
-  static constexpr uint8_t input_b = 0; // Faltan
+  static constexpr char INCREASE_SPEEDB = 'T';
+  static constexpr char LOWER_SPEEDB = 'X';
+  static constexpr char SHOOTB = 'C';
+  static constexpr char RIGHTB = 'R';
+  static constexpr char LEFTB = 'L';
+  static constexpr char RELEASEB = '0';
 
   // Security //
-  static constexpr uint8_t PIN_RIGHT_LIMIT = 0; // Faltan
-  static constexpr uint8_t PIN_LEFT_LIMIT = 0;  // Faltan
+  static constexpr uint8_t RIGHT_LIMIT_PIN = 0; // Faltan
+  static constexpr uint8_t LEFT_LIMIT_PIN = 0;  // Faltan
 
   // Solenoid //
   static constexpr uint8_t SOLENOID_PIN = 0;

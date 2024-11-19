@@ -1,34 +1,43 @@
 /*
-  Documentation of how buttons are going to be determine with the schematics. 
-  
+  Bluetooth buton Lingo
+  Release = 0
+  left = L
+  right = R
+  up = F
+  down = B
+
+  circule (right)= C
+  triangle(up) = T
+  x(down) = X
+  square(left) = S
 */
 
 #ifndef Control_h
 #define Control_h
 
-// External Files // 
+// External Files //
 #include "Constants.h"
+#include "BluetoothSerial.h"
 
 // Class //
-class Control{
-  private: 
-    // data // 
-    const uint8_t pinA = Constants::input_a; 
-    const uint8_t pinB = Constants::input_b; 
-  public:
+class Control
+{
+private:
+  // data //
+  volatile char _currentBoton;
+  BluetoothSerial *_esp32;
 
-    // Constructor // 
-    Control(); 
-    
-    // Setup //
-    void beginControl();
+public:
+  // Constructor //
+  Control();
 
-    // Getters // 
-    states getInput();
+  // Setup //
+  void BeginControl();
 
-    // Setters // 
+  // Getters //
+  states GetInput();
 
-    // Methods // 
-    
+  // Methods //
+  void PrintState(); // for debugging
 };
 #endif

@@ -14,18 +14,19 @@ void setup()
 {
   // Serial Communication //
   Serial.begin(Constants::BAUD_RATE);
-  movement.BeginMovement();
 
   // Setup //
-  control.beginControl();
+  control.BeginControl();
+  movement.BeginMovement();
+
+  // Limit Switches // 
 }
 
 void loop()
 {
   currenTime = micros();
-  currentState = control.getInput();
   movement.Move(currenTime);
-
+  currentState = control.GetInput();
   switch (currentState)
   {
   case Stop:
@@ -38,6 +39,12 @@ void loop()
     movement.SetRight();
     break;
   case Shoot:
+    break;
+  case LowerSpeed:
+    movement.DecreaseSpeed();
+    break;
+  case IncreaseSpeed:
+    movement.IncreaseSpeed();
     break;
   }
 }

@@ -16,6 +16,7 @@ private:
   unsigned long _lastTime;
   volatile bool _moveFlag;
   volatile bool _state; // False = turn of   True = turn on
+  const uint8_t _variation;
 
   // PINS //
   const uint8_t _dir;
@@ -43,6 +44,8 @@ public:
   // Methods //
   void DefaultPos();
   void Move(unsigned long currentTime); // This is going to be feed to the loop
+  void IncreaseSpeed();
+  void DecreaseSpeed();
 };
 
 #endif
