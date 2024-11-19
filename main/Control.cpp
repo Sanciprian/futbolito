@@ -1,7 +1,9 @@
 #include "Control.h"
 
 // Constructor //
-Control::Control() {}
+Control::Control() {
+  _esp32 = new BluetoothSerial();
+}
 
 // Setup //
 void Control::BeginControl()

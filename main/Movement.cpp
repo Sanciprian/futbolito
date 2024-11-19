@@ -83,7 +83,7 @@ void Movement::Move(unsigned long currentTime)
 void Movement::SetDriverState(bool state)
 {
   _state = state;
-  pinMode(_enable, !_state);
+  digitalWrite(_enable, !_state);
 }
 
 void Movement::DefaultPos()
@@ -99,4 +99,13 @@ void Movement::IncreaseSpeed()
 void Movement::DecreaseSpeed()
 {
   this->SetSpeed(_speed - _variation);
+}
+
+void Movement::Stop()
+{
+  this->SetDriverState(true);
+  digitalWrite(_step, LOW);
+  delayMicroseconds(1000);
+  this->SetDriverState(false);
+  _state = false;
 }

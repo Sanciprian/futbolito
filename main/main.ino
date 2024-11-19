@@ -1,14 +1,18 @@
 #include "Constants.h"
 #include "Control.h"
 #include "Movement.h"
+#include "Solenoid.h"
+#include "Ultrasonic.h"
 
 // Objects //
 Control control;
 Movement movement(Constants::DEFAULT_SPEED, Constants::DIR_PIN, Constants::STEP_PIN, Constants::ENABLE_PIN, Constants::SERIAL_DRIVER, Constants::DRIVER_ADDRESS);
-states currentState = Stop;
+Solenoid solenoid;
+Ultrasonic goal;
 
 // Gobal Variables //
 unsigned long currenTime;
+states currentState = Stop;
 
 void setup()
 {
@@ -18,15 +22,24 @@ void setup()
   // Setup //
   control.BeginControl();
   movement.BeginMovement();
+  solenoid.BeginSolenoid();
+  goal.BeginUltrasonic();
 
-  // Limit Switches // 
+  // Limit Switches //
+  pinMode(Constants::RIGHT_LIMIT_PIN, INPUT_PULLUP);
+  pinMode(Constants::LEFT_LIMIT_PIN, INPUT_PULLUP);
+  attachInterrupt(Constants::RIGHT_LIMIT_PIN, HardStop, CHANGE);
+  attachInterrupt(Constants::LEFT_LIMIT_PIN, HardStop, CHANGE);
 }
 
 void loop()
 {
   currenTime = micros();
   movement.Move(currenTime);
+  solenoid.State(currenTime);
   currentState = control.GetInput();
+  // goal.GetDistance
+  // control.PrintState();
   switch (currentState)
   {
   case Stop:
@@ -39,6 +52,7 @@ void loop()
     movement.SetRight();
     break;
   case Shoot:
+    solenoid.Shoot(currentState);
     break;
   case LowerSpeed:
     movement.DecreaseSpeed();
@@ -47,4 +61,15 @@ void loop()
     movement.IncreaseSpeed();
     break;
   }
+
+  goal.SetDistance();
+  if (goal.Score())
+  {
+    goal.PrintScore();
+  }
+}
+
+void HardStop()
+{
+  movement.Stop();
 }

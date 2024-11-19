@@ -46,6 +46,7 @@ public:
   void Move(unsigned long currentTime); // This is going to be feed to the loop
   void IncreaseSpeed();
   void DecreaseSpeed();
+  void Stop();
 };
 
 #endif

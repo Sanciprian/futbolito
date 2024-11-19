@@ -23,6 +23,7 @@ private:
 public:
   // General //
   static constexpr uint32_t BAUD_RATE = 115200;
+
   // Movement (Steppers) //
   static constexpr uint8_t DIR_PIN = 22;
   static constexpr uint8_t STEP_PIN = 22;
@@ -33,7 +34,7 @@ public:
   static constexpr uint8_t MAX_SPEED = 60;
   static constexpr uint8_t MIN_SPEED = 600;
   static constexpr uint8_t DEFAULT_SPEED = 300;
-  static constexpr uint8_t CURRENT = 1400; // max for driver.
+  static constexpr uint8_t CURRENT = 1400; // Max current mA for driver.
   static constexpr uint8_t SPEED_VARIATION = 5;
 
   // Controler //
@@ -45,10 +46,20 @@ public:
   static constexpr char RELEASEB = '0';
 
   // Security //
-  static constexpr uint8_t RIGHT_LIMIT_PIN = 0; // Faltan
-  static constexpr uint8_t LEFT_LIMIT_PIN = 0;  // Faltan
+  static constexpr uint8_t RIGHT_LIMIT_PIN = 0;
+  static constexpr uint8_t LEFT_LIMIT_PIN = 0;
 
   // Solenoid //
   static constexpr uint8_t SOLENOID_PIN = 0;
+  static constexpr uint32_t DURATION = 200000;        // Microseconds
+  static constexpr uint32_t RECOIL_DURATION = 200000; // Microseconds
+
+  // GOAL DETECTION | Ultrasonic && LCD //
+  static constexpr uint8_t TRIGGER_PIN = 0;
+  static constexpr uint8_t ECHO_PIN = 0;
+  static constexpr uint8_t COUNTER_PIN = 0;
+  static constexpr uint8_t LCD_ADDRESS = 0x3F;
+  static constexpr uint8_t LCD_COLUMNS = 2;
+  static constexpr uint8_t LCD_ROWS = 1;
 };
 #endif
