@@ -8,7 +8,7 @@
 class Solenoid{
   private:
     // data //
-    const solenoid = Constants::;
+    const uint8_t pin;
   public: 
     // Constructor //
     // Setup //
