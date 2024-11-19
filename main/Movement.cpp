@@ -7,7 +7,6 @@ Movement::Movement(uint8_t speed, uint8_t dirPin, uint8_t stepPin, uint8_t enabl
   this->SetSpeed(speed);
   _minSpeed = Constants::MIN_SPEED;
   _maxSpeed = Constants::MAX_SPEED;
-  _activeTime = 0;
   _driver = new TMC2208Stepper(&_serial, _address);
 }
 
@@ -21,11 +20,11 @@ void Movement::BeginMovement()
   pinMode(_enable, OUTPUT);
 
   // Driver
-  _driver.begin();
-  _driver.toff(5);                         // Configure off time
-  _driver.blank_time(24);                  // Configure blanking time
-  _driver.rms_current(Constants::CURRENT); // Set motor current in mA (adjust to your motor's rating)
-  _driver.microsteps(1);                   // No microstepping
+  _driver->begin();
+  _driver->toff(5);                         // Configure off time
+  _driver->blank_time(24);                  // Configure blanking time
+  _driver->rms_current(Constants::CURRENT); // Set motor current in mA (adjust to your motor's rating)
+  _driver->microsteps(1);                   // No microstepping
 
   // Variables
   _lastTime = micros();

@@ -8,12 +8,13 @@ Movement movement(Constants::DEFAULT_SPEED, Constants::DIR_PIN, Constants::STEP_
 states currentState = Stop;
 
 // Gobal Variables //
-unsigned long time;
+unsigned long currenTime;
 
 void setup()
 {
   // Serial Communication //
   Serial.begin(Constants::BAUD_RATE);
+  movement.BeginMovement();
 
   // Setup //
   control.beginControl();
@@ -21,9 +22,9 @@ void setup()
 
 void loop()
 {
-  time = micros();
+  currenTime = micros();
   currentState = control.getInput();
-  movement.Move(time);
+  movement.Move(currenTime);
 
   switch (currentState)
   {

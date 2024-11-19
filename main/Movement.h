@@ -42,7 +42,7 @@ public:
 
   // Methods //
   void DefaultPos();
-  void Move(); // This is going to be feed to the loop
+  void Move(unsigned long currentTime); // This is going to be feed to the loop
 };
 
 #endif
