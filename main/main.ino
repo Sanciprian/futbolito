@@ -28,8 +28,8 @@ void setup()
   // Limit Switches //
   pinMode(Constants::RIGHT_LIMIT_PIN, INPUT_PULLUP);
   pinMode(Constants::LEFT_LIMIT_PIN, INPUT_PULLUP);
-  attachInterrupt(Constants::RIGHT_LIMIT_PIN, HardStop, CHANGE);
-  attachInterrupt(Constants::LEFT_LIMIT_PIN, HardStop, CHANGE);
+  attachInterrupt(Constants::RIGHT_LIMIT_PIN, HardStop, FALLING);
+  attachInterrupt(Constants::LEFT_LIMIT_PIN, HardStop, FALLING);
 }
 
 void loop()
@@ -73,3 +73,4 @@ void HardStop()
 {
   movement.Stop();
 }
+//
