@@ -40,7 +40,7 @@ int Ultrasonic::GetGoals()
 
 bool Ultrasonic::Score()
 {
-    if (_distance <= 5 || _distance = 1207)
+    if (_distance <= 5 || _distance == 1207)
     {
         _goals = _goals + 1;
         return true;
